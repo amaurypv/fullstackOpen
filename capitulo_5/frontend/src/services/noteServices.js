@@ -34,9 +34,9 @@ const create=async(newObject)=>{
 //se va a definir el request put para editar un objeto existente en el servidor. 
 //para eso se necesita el id y la forma de ponerlo en su url es la base +id
 // y como se quiere modificar el objeto existente
-const update=(id,newObject)=>{
+const update=async(id,newObject)=>{
     const request=axios.put(`${baseURL}/${id}`,newObject)
-    return request.then(response=>response.data)
+    return request.data
 
 //se va a definir un request para eliminar una nota por su id
 //axios.delete()solo lleva la url y el id, no necesita nada mas como argumento

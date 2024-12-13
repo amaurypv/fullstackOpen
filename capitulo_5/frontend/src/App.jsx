@@ -118,20 +118,17 @@ const App = (props) => {
       </div>
     )
   }
-  const addNote=(event)=>{
+  const addNote=async(event)=>{
     event.preventDefault()
     console.log('button clicked',event.target)
     const noteObject={
       content: newNote,
       important: Math.random()<0.5,
-      
     }
-
-    noteServices.create(noteObject)
-      .then(returnNote=>{
-        setNotes(notes.concat(returnNote))
-        SetNewNote('')
-      })
+      const nuevaNota= await noteServices.create(noteObject) 
+      setNotes(prevData=>[...prevData,nuevaNota])
+      SetNewNote('')
+      
   }
 
   const hook=()=>{
@@ -155,7 +152,7 @@ const App = (props) => {
         setTimeout(()=>{
           setErrorMEssage(null)},5000)
         })
-  }
+  } 
 
   const eliminarNota=(id)=>{
     noteServices.eliminar(id).then(()=>
